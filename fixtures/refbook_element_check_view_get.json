@@ -1,0 +1,119 @@
+[
+  {
+    "model": "reference.reference",
+    "pk": 1,
+    "fields": {
+      "code": "MS1",
+      "name": "first",
+      "description": "firts reference"
+    }
+  },
+  {
+    "model": "reference.reference",
+    "pk": 2,
+    "fields": {
+      "code": "ICD-10",
+      "name": "second",
+      "description": "second reference"
+    }
+  },
+  {
+    "model": "reference.reference",
+    "pk": 3,
+    "fields": {
+      "code": "MS3",
+      "name": "third",
+      "description": "third reference"
+    }
+  },
+  {
+    "model": "reference.referenceversion",
+    "pk": 1,
+    "fields": {
+      "reference": 1,
+      "version": "1.0",
+      "start_date": "2023-04-26"
+    }
+  },
+  {
+    "model": "reference.referenceversion",
+    "pk": 2,
+    "fields": {
+      "reference": 1,
+      "version": "2.0",
+      "start_date": "2022-01-01"
+    }
+  },
+  {
+    "model": "reference.referenceversion",
+    "pk": 3,
+    "fields": {
+      "reference": 2,
+      "version": "1.0",
+      "start_date": "2023-01-01"
+    }
+  },
+  {
+    "model": "reference.referenceversion",
+    "pk": 4,
+    "fields": {
+      "reference": 3,
+      "version": "1.0",
+      "start_date": "2023-04-27"
+    }
+  },
+  {
+    "model": "reference.referenceelement",
+    "pk": 1,
+    "fields": {
+      "version": 1,
+      "code": "J00",
+      "value": "()"
+    }
+  },
+  {
+    "model": "reference.referenceelement",
+    "pk": 2,
+    "fields": {
+      "version": 1,
+      "code": "J01",
+      "value": "j01 val"
+    }
+  },
+  {
+    "model": "reference.referenceelement",
+    "pk": 3,
+    "fields": {
+      "version": 2,
+      "code": "J00",
+      "value": "j00 val"
+    }
+  },
+  {
+    "model": "reference.referenceelement",
+    "pk": 4,
+    "fields": {
+      "version": 2,
+      "code": "J01",
+      "value": "Common cold"
+    }
+  },
+  {
+    "model": "reference.referenceelement",
+    "pk": 5,
+    "fields": {
+      "version": 3,
+      "code": "J00",
+      "value": "()"
+    }
+  },
+  {
+    "model": "reference.referenceelement",
+    "pk": 6,
+    "fields": {
+      "version": 3,
+      "code": "J01",
+      "value": "Common cold"
+    }
+  }
+]
