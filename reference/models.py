@@ -38,6 +38,10 @@ class Reference(models.Model):
             return versions.first()
         else:
             return None
+    class Meta:
+        verbose_name = 'Справочник'
+        verbose_name_plural = 'Справочники'
+
 
 
 class ReferenceVersion(models.Model):
@@ -61,6 +65,8 @@ class ReferenceVersion(models.Model):
 
     class Meta:
         unique_together = ('reference', 'start_date')
+        verbose_name = 'Версия справочника'
+        verbose_name_plural = 'Версии справочников'
 
     def __str__(self):
         return self.version
@@ -88,6 +94,8 @@ class ReferenceElement(models.Model):
 
     class Meta:
         unique_together = ('version', 'code')
+        verbose_name = 'Элемент справочника'
+        verbose_name_plural = 'Элементы справочника'
 
     def __str__(self):
         return self.code

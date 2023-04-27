@@ -108,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -128,7 +128,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SWAGGER_SETTINGS = {
-    'DEFAULT_INFO': 'myapp.urls.openapi_info',
+    'DEFAULT_INFO': 'reference.urls.openapi_info',
     'SECURITY_REQUIREMENTS': [],
     'REFETCH_SCHEMA_WITH_AUTH': True,
     'PERSIST_AUTH': True,
