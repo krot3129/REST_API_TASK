@@ -23,30 +23,19 @@ class RefBookList(APIView):
     )
     def get(self, request):
         date = self.request.query_params.get('date', None)
-        if date is not None:
-            refbooks = []
-            for reference in Reference.objects.all():
+        refbooks = []
+        for reference in Reference.objects.all():
+            if date is not None:
                 versions = ReferenceVersion.objects.filter(
                     reference=reference, start_date__lte=date
                 ).order_by('-start_date')
-                if versions.exists():
-                    latest_version = versions.first()
-                    serializer = RefBookSerializer(
-                        {'id': reference.id, 'code': reference.code, 'name': latest_version.version}
-                    )
-                    refbooks.append(serializer.data)
-        else:
-            refbooks = []
-            for reference in Reference.objects.all():
-                versions = ReferenceVersion.objects.filter(
-                    reference=reference
-                ).order_by('-start_date')
-                if versions.exists():
-                    latest_version = versions.first()
-                    serializer = RefBookSerializer(
-                        {'id': reference.id, 'code': reference.code, 'name': latest_version.version}
-                    )
-                    refbooks.append(serializer.data)
+            else:
+                versions = ReferenceVersion.objects.filter(reference=reference).order_by('-start_date')
+            if versions.exists():
+                serializer = RefBookSerializer(
+                                {'id': reference.id, 'code': reference.code, 'name': reference.name}
+                            )
+                refbooks.append(serializer.data)
         return Response({'refbooks': refbooks})
 
 
