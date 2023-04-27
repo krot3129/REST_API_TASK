@@ -24,7 +24,7 @@ JSON.
   ```
   - Для операционной системы Windows:
   ```commandline
-  - название_виртуального_окружения\Scripts\activate.bat
+  название_виртуального_окружения\Scripts\activate.bat
   ```
 * Установка необходимый зависимостей:
 ```commandline
