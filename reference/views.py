@@ -54,22 +54,6 @@ class RefbookElementsView(generics.RetrieveAPIView):
     """
     Класс для получения элементов конкретного справочника.
 
-    Parameters:
-    ----------
-    id : int
-        Идентификатор справочника.
-    version : str
-        (Optional) Версия справочника. Если не указана, возвращаются элементы из текущей версии.
-
-    Returns:
-    -------
-    elements : list
-        Список элементов справочника.
-
-    Raises:
-    ------
-    Http404:
-        В случае отсутствия запрашиваемого справочника или его версии.
     """
     serializer_class = RefBookElementSerializer
 
@@ -79,6 +63,16 @@ class RefbookElementsView(generics.RetrieveAPIView):
         responses={200: 'elements'}
     )
     def get_queryset(self):
+        """
+        :argument:
+        id (int): Идентификатор справочника.
+        version (str, optional): Версия справочника для проверки.
+
+        :return: elements : list
+        Список элементов справочника.
+        Raises: Http404:
+        В случае отсутствия запрашиваемого справочника или его версии.
+        """
         refbook_id = self.kwargs.get('id')
         version = self.request.query_params.get('version')
 
@@ -121,14 +115,7 @@ class RefbookElementCheckView(APIView):
     """
     Представление для проверки существования данного ссылочного элемента с кодом и значением.
     В конкретной версии справочника.
-    GET request parameters:
-    id (int): Идентификатор справочника.
-    code (str): Код элемента ссылки для проверки.
-    value (str): Значение элемента ссылки для проверки.
-    version (str, optional): Версия справочника для проверки.
-             Если не указано, будет использоваться текущая версия.
-    Returns: Объект JSON с одним логическим полем «существует», что указывает
-         найден ли элемент в указанной версии справочника.
+
     """
 
     @swagger_auto_schema(
@@ -139,6 +126,15 @@ class RefbookElementCheckView(APIView):
         responses={200: 'exists'}
     )
     def get(self, request, id):
+        """
+        GET request parameters:
+        id (int): Идентификатор справочника.
+        code (str): Код элемента ссылки для проверки.
+        value (str): Значение элемента ссылки для проверки.
+        version (str, optional): Версия справочника для проверки.
+             Если не указано, будет использоваться текущая версия.
+        Returns: Объект JSON с одним логическим полем «существует», что указывает
+         найден ли элемент в указанной версии справочника."""
         # Извлекаем параметры из запроса
         code = self.request.query_params.get('code')
         value = self.request.query_params.get('value')
