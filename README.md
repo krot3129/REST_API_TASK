@@ -31,14 +31,14 @@ JSON.
 pip install -r requirements.txt
 ```
 ### Первый запуск приложения
-* В дерриктории проекта выполнить следующие действие
+* В директории проекта выполнить следующие действие
 ```commandline
 python manage.py makemigrations
 ```
 ```commandline
 python manage.py migrate
 ```
-* Для установки фикстру (опционально) использовать следующию команду
+* Для установки фикстр (опционально) использовать следующию команду
 ```commandline
 python manage.py loaddata fixtures/fixture.json
 ```
