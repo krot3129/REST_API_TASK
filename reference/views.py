@@ -32,9 +32,7 @@ class RefBookList(APIView):
             else:
                 versions = ReferenceVersion.objects.filter(reference=reference).order_by('-start_date')
             if versions.exists():
-                serializer = RefBookSerializer(
-                                {'id': reference.id, 'code': reference.code, 'name': reference.name}
-                            )
+                serializer = RefBookSerializer({'id': reference.id, 'code': reference.code, 'name': reference.name})
                 refbooks.append(serializer.data)
         return Response({'refbooks': refbooks})
 
