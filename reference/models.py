@@ -38,10 +38,10 @@ class Reference(models.Model):
             return versions.first()
         else:
             return None
+
     class Meta:
         verbose_name = 'Справочник'
         verbose_name_plural = 'Справочники'
-
 
 
 class ReferenceVersion(models.Model):
@@ -59,7 +59,7 @@ class ReferenceVersion(models.Model):
     Методы:
         - __str__: возвращает версию справочника
     """
-    reference = models.ForeignKey(Reference, on_delete=models.PROTECT, verbose_name='Внешний ключ на справочник')
+    reference = models.ForeignKey(Reference, on_delete=models.CASCADE, verbose_name='Внешний ключ на справочник')
     version = models.CharField(max_length=50, verbose_name='Версия справочника')
     start_date = models.DateField(verbose_name='Дата начала действия версии')
 
@@ -87,7 +87,7 @@ class ReferenceElement(models.Model):
     Методы:
         - __str__: возвращает код элемента справочника
     """
-    version = models.ForeignKey(ReferenceVersion, on_delete=models.PROTECT,
+    version = models.ForeignKey(ReferenceVersion, on_delete=models.CASCADE,
                                 verbose_name='Внешний ключ на версию справочника')
     code = models.CharField(max_length=100, verbose_name='Код элемента справочника')
     value = models.CharField(max_length=300, verbose_name='Значение элемента справочника')

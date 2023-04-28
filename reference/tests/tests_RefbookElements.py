@@ -35,7 +35,7 @@ class RefbookElementsViewTestCase(APITestCase):
         """
         Test GET request to RefbookElementsView without version parameter
         """
-        url = reverse('refbook_elements_list', kwargs={'id': self.refbook.id})
+        url = reverse('reference:refbook_elements_list', kwargs={'id': self.refbook.id})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data['elements']), 3)
@@ -44,7 +44,7 @@ class RefbookElementsViewTestCase(APITestCase):
         """
         Test GET request to RefbookElementsView with valid version parameter
         """
-        url = reverse('refbook_elements_list', kwargs={'id': self.refbook.id})
+        url = reverse('reference:refbook_elements_list', kwargs={'id': self.refbook.id})
         response = self.client.get(url, {'version': '1.0'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data['elements']), 3)
@@ -53,6 +53,6 @@ class RefbookElementsViewTestCase(APITestCase):
         """
         Test GET request to RefbookElementsView with nonexistent refbook id
         """
-        url = reverse('refbook_elements_list', kwargs={'id': 1000})
+        url = reverse('reference:refbook_elements_list', kwargs={'id': 1000})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
