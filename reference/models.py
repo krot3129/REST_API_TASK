@@ -21,7 +21,7 @@ class Reference(models.Model):
     description = models.TextField(verbose_name='Описание справочника')
 
     def __str__(self):
-        return self.name
+        return f'{self.name} {self.code}'
 
     def get_current_version(self):
         """

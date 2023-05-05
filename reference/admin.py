@@ -14,7 +14,7 @@ class ReferenceElementInline(admin.TabularInline):
 
 @admin.register(Reference)
 class ReferenceAdmin(admin.ModelAdmin):
-    list_display = ('id', 'code', 'name', 'get_current_version', 'get_current_version')
+    list_display = ('id', 'code', 'name', 'get_current_version')
     search_fields = ('code', 'name')
     inlines = [ReferenceVersionInline]
 

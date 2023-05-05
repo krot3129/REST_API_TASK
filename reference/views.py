@@ -1,3 +1,4 @@
+from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics
 from rest_framework.response import Response
@@ -19,7 +20,16 @@ class RefBookList(APIView):
     @swagger_auto_schema(
         operation_summary="Get list of reference books",
         operation_description="Returns a JSON response containing the list of available reference books.",
-        responses={200: 'refbooks'}
+        responses={200: 'refbooks'},
+        manual_parameters=[
+            openapi.Parameter(
+                name='date',
+                in_=openapi.IN_QUERY,
+                required=False,
+                type=openapi.TYPE_STRING,
+                description='Date for filtering the list of reference books in format yyyy-mm-dd.'
+            )
+        ]
     )
     def get(self, request):
         date = self.request.query_params.get('date', None)
@@ -46,11 +56,7 @@ class RefbookElementsView(generics.RetrieveAPIView):
     """
     serializer_class = RefBookElementSerializer
 
-    @swagger_auto_schema(
-        operation_summary="Get elements of reference book",
-        operation_description="Returns a JSON response containing the elements of a reference book.",
-        responses={200: 'elements'}
-    )
+
     def get_queryset(self):
         """
         :argument:
@@ -83,7 +89,16 @@ class RefbookElementsView(generics.RetrieveAPIView):
             elements = ReferenceElement.objects.filter(version=current_version)
 
         return elements
-
+    @swagger_auto_schema(
+        operation_summary="Get elements of reference book",
+        operation_description="Returns a JSON response containing the elements of a reference book.",
+        responses={200: 'elements'},
+        manual_parameters=[
+            openapi.Parameter('id', openapi.IN_PATH, description="ID of the reference book", type=openapi.TYPE_INTEGER),
+            openapi.Parameter('version', openapi.IN_QUERY, description="Version of the reference book",
+                              type=openapi.TYPE_STRING),
+        ]
+    )
     def get(self, request, *args, **kwargs):
         """
         Получение элементов справочника.
@@ -112,7 +127,33 @@ class RefbookElementCheckView(APIView):
         operation_description="Returns a JSON response indicating"
                               " whether the specified reference"
                               " element exists in the specified reference book version.",
-        responses={200: 'exists'}
+        responses={200: 'exists'},
+        manual_parameters=[
+            openapi.Parameter(
+                name="id",
+                in_=openapi.IN_QUERY,
+                description="Идентификатор справочника",
+                type=openapi.TYPE_INTEGER
+            ),
+            openapi.Parameter(
+                name="code",
+                in_=openapi.IN_QUERY,
+                description="Код элемента ссылки для проверки",
+                type=openapi.TYPE_STRING
+            ),
+            openapi.Parameter(
+                name="value",
+                in_=openapi.IN_QUERY,
+                description="Значение элемента ссылки для проверки",
+                type=openapi.TYPE_STRING
+            ),
+            openapi.Parameter(
+                name="version",
+                in_=openapi.IN_QUERY,
+                description="Версия справочника для проверки. Если не указано, будет использоваться текущая версия.",
+                type=openapi.TYPE_STRING
+            )
+        ]
     )
     def get(self, request, id):
         """

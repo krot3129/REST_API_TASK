@@ -19,6 +19,7 @@ schema_view = get_schema_view(
 )
 
 
+
 urlpatterns = [
     path('refbooks/', RefBookList.as_view(), name='refbook-list'),
     path('refbooks/<int:id>/elements/', RefbookElementsView.as_view(), name='refbook_elements_list'),
